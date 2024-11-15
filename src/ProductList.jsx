@@ -1,10 +1,15 @@
 import React, { useState,useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+import { useDispatch } from 'react-redux';
+import { addItem } from './CartSlice'; // Adjust the path to where your cart slice/actions are defined
+
+
 function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+    const dispatch = useDispatch();
 
     const plantsArray = [
         {
@@ -243,17 +248,17 @@ const handlePlantsClick = (e) => {
     setShowCart(false); // Hide the cart when navigating to About Us
 };
 
-   const handleContinueShopping = (e) => {
-    e.preventDefault();
-    setShowCart(false);
+const handleContinueShopping = () => {
+    setShowCart(false); // Hide the cart
+    setShowPlants(true); // Show the plant listing
   };
 
   const handleAddToCart = (product) => {
-    dispatch(addItem(product));
+    dispatch(addItem(product)); // Dispatch the addItem action
     setAddedToCart((prevState) => ({
-       ...prevState,
-       [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
-     }));
+      ...prevState,
+      [product.name]: true, // Mark the product as added to cart
+    }));
   };
 
     return (
@@ -265,7 +270,7 @@ const handlePlantsClick = (e) => {
                <a href="/" style={{textDecoration:'none'}}>
                         <div>
                     <h3 style={{color:'white'}}>Paradise Nursery</h3>
-                    <i style={{color:'white'}}>Where Green Meets Serenity</i>
+                    <i style={{color:'white'}}>Dahanne Green Meets Serenity</i>
                     </div>
                     </a>
                 </div>

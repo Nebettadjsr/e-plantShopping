@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: "/shoppingreact",
   plugins: [react()],
+  server: {
+    hot: true, // Ensure hot module replacement is enabled
+  },
 })
